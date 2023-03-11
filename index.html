@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░██░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░▄▀░░░░░░░░░░█░░░░░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░░░▄▀░░░░█░░▄▀▄▀▄▀▄▀▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█
+█░░▄▀░░█████████████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀░░███░░▄▀░░░░░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀░░░░░░░░░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░█████████
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░██░░░░░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█
+█████████░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░▄▀░░███░░▄▀░░██░░▄▀░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░█
+█░░░░░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░░░░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░░░▄▀░░░░█░░▄▀░░██░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░██░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
+█░░░░░░░░░░░░░░█████░░░░░░█████░░░░░░░░░░░░░░█░░░░░░████████████░░░░░░██░░░░░░█░░░░░░██░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
+███████████████████████████████████████████████████████████████████████████████████████████████████████
+█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░████░░░░░░░░░░░░░░███░░░░░░░░░░░░░░░░███░░░░░░░░░░░░░░████░░░░░░█
+█░░▄▀░░░░░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░█
+█░░▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░███░░▄▀░░░░░░░░▄▀░░███░░▄▀░░░░░░▄▀░░████░░▄▀░░█
+█░░▄▀░░░░░░▄▀░░░░░░▄▀░░█░░▄▀░░████████████░░▄▀░░██░░▄▀░░███░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░▄▀░░░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░████░░▄▀░░█
+█░░▄▀░░██░░░░░░██░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░████░░░░░░█
+█░░▄▀░░██████████░░▄▀░░█░░▄▀░░████████████░░▄▀░░████░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░██░░▄▀░░███████████
+█░░▄▀░░██████████░░▄▀░░█░░▄▀░░░░░░░░░░████░░▄▀░░░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░████░░░░░░█
+█░░▄▀░░██████████░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░█
+█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░████░░░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░█
+███████████████████████████████████████████████████████████████████████████████████████████████████████
+-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Hi There , I am Abhishek Morla. I am a Information Security Enthusiast. I am from Bhilai,Chhattisgarh,India">
+    <meta name="author" content="Abhishek Morla">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Title -->
+    <title>Abhishek Morla -> Just an InfoSec Guy</title>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" type="image/png" rel="icon">
+
+    <!-- All CSS -->
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+    <!-- Global site tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEQ6RYWG8V"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-WEQ6RYWG8V');
+    </script>
+    <!-- Global site tag (gtag.js) -->
+</head>
+
+<body id="body" data-spy="scroll" data-target="#menu-list">
+
+    <!--  start page loader  -->
+    <div id="preloader">
+        <div class="scroll-static"></div>
+    </div>
+    <!--  end page loader  -->
+
+    <!-- begin of main-wrapper -->
+    <div class="main-wrapper">
+        <!-- begin of navbar -->
+        <div class="nav-bar">
+            <!-- begin of scroll-indicator -->
+            <div class="scroll-indicator"></div>
+            <nav>
+                <ul id="menu-list">
+                    <li class="nav-item">
+                        <a class="active nav-link" href="#body" data-text="Home">
+                            <span>01</span>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" data-text="About">
+                            <span>02</span>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience" data-text="Experience">
+                            <span>03</span>Experience
+                        </a>
+                    </li>
+                    <!--<li class="nav-item"><a class="nav-link" href="#hall" data-text="Hall">
+						<span>04</span>Hobbies
+					</a></li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#certifications" data-text="Achievements">
+                            <span>04</span>Achievements
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education" data-text="Education">
+                            <span>05</span>Education
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blogs" data-text="Blogs">
+                            <span>06</span>Blogs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" data-text="Contact">
+                            <span>07</span>Contact
+                        </a>
+                    </li>
+                    <!--<li class="nav-item"><a class="nav-link" href="#buyMeACoffe" data-text="Buy me a Coffee">
+					<span>11</span>Buy me a Coffee
+				</a></li>-->
+                </ul> <br><br><br>
+
+            </nav>
+
+        </div>
+        <!-- end of navbar -->
+        <!-- begin of main-content -->
+        <div class="main-content">
+            <!-- begin of header -->
+            <header>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-7">
+                            <!-- logo -->
+                            <div class="logo">
+                                <a href="#">abhishekmorla</a>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <a href="https://abhishekmorla.medium.com/" target="_blank" class="default-btn header-action-btn"><i class="ti-agenda"></i>Blog</a>&nbsp;
+                            <div class="default-btn menu-btn">
+                                <i class="ti-menu"></i>
+                                <i class="ti-close"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- end of header -->
+
+            <!-- begin of home-wrapper -->
+            <div class="home-wrapper">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 col-sm-5">
+                            <div class="hero-img wow fadeIn" data-wow-delay=".2s">
+                                <div class="shape"></div>
+                                <!-- hero image -->
+                                <img class="img-fluid" src="img/Capture4.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-7 col-sm-7">
+                            <div class="hero-content">
+                                <h2 class="intro-name">
+                                    <span class="wow slideInLeft">Hello World</span>
+                                    <span class="wow slideInLeft" data-wow-delay=".2s">I'm, Abhishek Morla </span>
+                                </h2>
+                                <p>
+                                    <span class="wow slideInLeft" data-wow-delay=".5s">Red Team Enthusiast | Synack Red Team & Yogosha & Detectify Crowdsource Member | Bug Bounty Hunter | CTF Player</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of home-wrapper -->
+
+            <!-- begin of about-wrapper -->
+            <div id="about" class="wrapper about-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- section heading -->
+
+                            <h3 class="wrapper-heading">About Me</h3>
+
+                            <h4 class="about-sub-heading">Hi , I am Abhishek Morla And here is some detail about me.</h4>
+                            <p class="about-text">I am a dedicated Information Security Enthusiast and aspire to become a Red Teamer <br> Currently, I am a 21-year-old third-year B.tech CSE student. I have been involved in the field of Information Security since 2020, and
+                                I am an aspirant of the OSCP certification. I possess significant expertise in conducting Web Application, Network Penetration Testing, VAPT, and Red Teaming. My skills are honed through my participation in Hackthebox,
+                                where I have achieved the rank of "Pro Hacker." Additionally, I share my recent findings and experiences through my blog. I am an esteemed member of the Synack Red Team and a valued community member of Yogosha, where I
+                                participate in Bug Hunting on their platform. I am currently seeking opportunities in the InfoSec field, primarily in the Red Team or Penetration Testing roles, where I can utilize my skills and passion for Information
+                                Security.
+
+                            </p>
+                            <a href="https://abhishekmorla.medium.com/" target="_blank" class="default-btn"><i class="ti-agenda"></i>My Blog</a>
+                            <a href="https://0xprashant.in/resume.pdf" target="_blank" class="default-btn"><i class="ti-agenda"></i>Download My Resume</a>
+
+                            <!-- social profile links -->
+                            <div class="social-links">
+                                <span>Connect with Me </span>
+                                <ul>
+                                    <li><a href="https://twitter.com/abhishekmorla" data-text="tw" target="_blank"><i class="ti-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/_abhii.0" data-text="ig" target="_blank"><i class="ti-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/abhishekmorla/" data-text="in" target="_blank"><i class="ti-linkedin"></i></a></li>
+                                    <li><a href="https://www.github.com/abhishekmorla/" data-text="git" target="_blank"><i class="ti-github"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of about-wrapper -->
+            <!-- begin of skills-wrapper -->
+            <div id="skills" class="wrapper skills-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 margin-on-md">
+                            <!-- section heading -->
+                            <h3 class="wrapper-heading">Skills</h3>
+
+
+                            <!-- skill item -->
+                            <div class="skill-item">
+                                <p>Web Application Penetration Testing</p>
+                                <div class="skill-wrap">
+                                    <div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:80%"></div>
+                                </div>
+                            </div>
+                            <!-- skill item -->
+                            <div class="skill-item">
+                                <p>Network Security</p>
+                                <div class="skill-wrap">
+                                    <div class="skill-percent wow slideInLeft" data-wow-delay=".2s" style="width:90%"></div>
+                                </div>
+                            </div>
+                            <!-- skill item -->
+                            <div class="skill-item">
+                                <p>VAPT</p>
+                                <div class="skill-wrap">
+                                    <div class="skill-percent wow slideInLeft" data-wow-delay=".3s" style="width:95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- section heading -->
+                            <br><br><br><br>
+                            <!-- skill item -->
+                            <div class="skill-item">
+                                <p>Python</p>
+                                <div class="skill-wrap">
+                                    <div class="skill-percent wow slideInLeft" style="width:95%"></div>
+                                </div>
+                            </div>
+
+                            <!-- skill item -->
+                            <!-- skill item -->
+                            <div class="skill-item">
+                                <p>C Programming</p>
+                                <div class="skill-wrap">
+                                    <div class="skill-percent wow slideInLeft" style="width:90%"></div>
+                                </div>
+                            </div>
+                            <!-- skill item -->
+                            <div class="skill-item">
+                                <p>Node JS</p>
+                                <div class="skill-wrap">
+                                    <div class="skill-percent wow slideInLeft" data-wow-delay=".1s" style="width:100%"></div>
+                                </div>
+                            </div>
+                            <!-- skill item -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of skills-wrapper -->
+
+            <!-- begin of experience-wrapper -->
+            <div id="experience" class="wrapper experience-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- section heading -->
+                            <h3 class="wrapper-heading">Experience</h3>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Securelayer7</h4>
+                                <p class="position-name">Security Consultant Intern</p>
+                                <p class="mute-text">March 2022 - Present</p>
+                                <p class="company-info">SecureLayer7 is a Cyber Security Company Specialized in Vulnerability Assessment, Penetration Testing Services, Source Code Audit, Red Teaming.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Synack Red Team</h4>
+                                <p class="position-name">Red Team Member</p>
+                                <p class="mute-text">September 2021 - Present</p>
+                                <p class="company-info">Securing the Clients and internet</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Yogosha</h4>
+                                <p class="position-name">Community Member</p>
+                                <p class="mute-text">June 2022 - Present</p>
+                                <p class="company-info">Yogosha is a private bug bounty platform</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Detectify Crowdsource</h4>
+                                <p class="position-name">Community Member</p>
+                                <p class="mute-text">June 2021 - Present</p>
+                                <p class="company-info">A community of ethical hackers who submit vulnerability research to Detectify</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of experience-wrapper -->
+
+
+            <!-- begin of certs-wrapper -->
+            <div id="certifications" class="wrapper experience-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- section heading -->
+                            <h3 class="wrapper-heading">Certifications & Achievements</h3>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Gurugram Police Cyber Security Summer Internship</h4>
+                                <p class="position-name">Offensive Security</p>
+                                <p class="mute-text"><a href="https://media.licdn.com/dms/image/C562DAQHI_vcFjeT5mA/profile-treasury-image-shrink_1280_1280/0/1637137458846?e=1679137200&v=beta&t=8TeGG0J9OAWTlIRmORhuIB_OHnyh8Ux6mkZQAbKYWkk" target="_blank">Verify Certificate</a></p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Certified Network Security Specialist (CNSS)</h4>
+                                <p class="position-name">ICSI</p>
+                                <p class="mute-text"><a href="https://www.credential.net/c889998f-ef39-483d-b03b-1de2bc40c185" target="_blank">Verify Certificate</a></p>
+                                <p class="mute-text">Credential ID: 18753150</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Certified AppSec Practitioner (CAP)</h4>
+                                <p class="position-name">The SecOps Group</p>
+                                <p class="mute-text"><a href="https://drive.google.com/file/d/1RhxvJ5Oz3AgEzZ03RMm72EdU1txx50-9/view" target="_blank">Verify Certificate</a></p>
+                                <p class="mute-text">Credential ID: 6897840</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Certified Network Security Practitioner (CNSP)</h4>
+                                <p class="position-name">The SecOps Group</p>
+                                <p class="mute-text"><a href="https://drive.google.com/file/d/1RhxvJ5Oz3AgEzZ03RMm72EdU1txx50-9/view" target="_blank">Verify Certificate</a></p>
+                                <p class="mute-text">Certification ID : 6897840</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Oracle Critical patch Oct 2020</h4>
+                                <p class="position-name">Oracle</p>
+                                <p class="mute-text">October 2020</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="experience-single">
+                                <h4 class="company">Microsoft Security Response Center Acknowledgements Jun 2021</h4>
+                                <p class="position-name">Microsoft</p>
+                                <p class="mute-text">
+                                    Jun 30, 2021</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- end of certs-wrapper -->
+
+            <!-- begin of community-wrapper 
+			<div id="talks" class="wrapper education-wrapper">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<h3 class="wrapper-heading">Talks & Sessions</h3>
+						</div>
+
+						<div class="col-lg-4 col-md-6 col-sm-6">
+							<div class="education-single">
+								<h4 class="course-name">NUll</h4>
+							</div>
+						</div>							
+
+					</div>
+				</div>
+			</div>
+			-->
+
+
+            <!-- begin of education-wrapper -->
+            <div id="education" class="wrapper education-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- section heading -->
+                            <h3 class="wrapper-heading">Education</h3>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="education-single">
+                                <h4 class="course-name">Bachelor's of Technology</h4>
+                                <p class="institute">Shri Shankaracharya Technical Campus, Bhilai Chhattisgarh</p>
+                                <p class="mute-text">2020 - 2024</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end of education-wrapper -->
+
+            <!-- begin of blogs-wrapper -->
+
+            <div id="blogs" class="wrapper blogs-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <!-- section heading -->
+                            <h3 class="wrapper-heading">Blogs</h3>
+                            <br>
+                            <h4> Read my Blogs <a href="https://abhishekmorla.medium.com/" class="blog-title">Here</a></h4>
+                            <br>
+                            <br>
+                        </div>
+
+
+
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="blog-item">
+                                <a href="https://abhishekmorla.medium.com/bypassing-the-client-side-encryption-to-read-internal-windows-server-files-e832da8b4ac8" target="_blank">
+                                    <div class="blog-img">
+                                        <img class="img-fluid" src="img/htb-bug.png" alt="Hackthebox Reverse tabnabbing">
+                                    </div>
+                                    <div class="blog-info">
+                                        <h4 class="blog-title">
+                                            <span>Bypassing The Client Side Encryption To Read Internal Windows Server Files</span>
+                                        </h4>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="blog-item">
+                                <a href="https://medium.com/@abhishekmorla/how-i-was-able-to-find-150-vulnerable-applications-to-cve-2022-26134-a-zero-day-rce-e2b40cf766cf" target="_blank">
+                                    <div class="blog-img">
+                                        <img class="img-fluid" src="img/oscp-review.jpg" alt="Oscp Review" width="1000" height="1000">
+                                    </div>
+                                    <div class="blog-info">
+                                        <h4 class="blog-title">
+                                            <span>CVE-2022–26134 | A Zero-day RCE</span>
+                                        </h4>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="blog-item">
+                                <a href="https://medium.com/@abhishekmorla/how-i-able-to-steal-password-reset-token-of-any-user-with-severity-p2-4ff0af436949/" target="_blank">
+                                    <div class="blog-img">
+                                        <img class="img-fluid" src="img/oouch.png" alt="Hackthebox Oouch Machine Walkthorugh">
+                                    </div>
+                                    <div class="blog-info">
+                                        <h4 class="blog-title">
+                                            <span>How I able to steal password reset token of any user.</span>
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- begin of contact-wrapper -->
+                    <div class="wrapper contact-wrapper">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- section heading -->
+                                    <h3 class="wrapper-heading">Get in Touch</h3>
+                                    <p>Drop me a text over Email at below details.</p>
+                                </div>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="contact-info">
+                                        <p><span class="ti-email"></span>abhishekmorla87@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- end of contact-wrapper -->
+
+                    <!-- begin of contact-wrapper -->
+                    <footer class="wrapper footer-wrapper">
+                        <div class="container-fluid">
+                            <div class="col-md-12 text-center">
+                                <div class="footer-social">
+                                    <a href="https://twitter.com/abhishekmorla" target="_blank">Twitter</a>
+                                    <a href="https://www.instagram.com/abhishekmorla/" target="_blank">Instagram</a>
+                                    <a href="https://www.linkedin.com/in/abhishekmorla/" target="_blank">Linkedin</a>
+                                </div>
+                                <p class="footer-copyright">© Copyright 2023 - Abhishek Morla</p>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- end of contact-wrapper -->
+
+                    <!-- scroll-to top -->
+                    <a class="default-btn scroll-to-top" href="#body"><span class="ti-angle-up "></span></a>
+
+                </div>
+                <!-- end of main-content -->
+            </div>
+            <!-- end of main-wrapper -->
+
+            <!-- All JS -->
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/plugins.js"></script>
+            <script src="js/main.js"></script>
+
+</body>
+
+</html>
